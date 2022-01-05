@@ -1,0 +1,1 @@
+CREATE TRIGGER store_eath_population_updates
