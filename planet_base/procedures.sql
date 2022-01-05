@@ -29,6 +29,7 @@ BEGIN
     RETURN QUERY
     SELECT satellite.name, planet.name, satellite.radius FROM satellite, planet
     WHERE planet.id_system = syst AND planet.id = satellite.id_planet AND satellite.radius < 751;
+    ORDER BY satellite.name, planet.name, satellite.radius
 END
 $$ LANGUAGE plpgsql;
 
