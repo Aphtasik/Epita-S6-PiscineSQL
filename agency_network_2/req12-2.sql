@@ -1,5 +1,6 @@
-SELECT
-    CASE WHEN acronym LIKE '__[0-9]' THEN REPLACE(acronym, '[0-9]')
+    SELECT
+    CASE
+        WHEN length(acronym) < 4 THEN substring(acronym from '^..') || 0 || substring(acronym from '.$')
     END AS acronym
 FROM destination
 ORDER BY acronym;
