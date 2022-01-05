@@ -5,7 +5,7 @@ CREATE FUNCTION space_travel(origin INT, destination INT, quantity BIGINT)
     RETURNS boolean AS
 $$
 BEGIN
-    IF quantity > (SELECT population FROM planet WHERE id = origin) THEN
+    IF quantity > (SELECT population FROM planet WHERE id = origin) OR quantity < 0 THEN
         RETURN FALSE;
     END IF;
 
