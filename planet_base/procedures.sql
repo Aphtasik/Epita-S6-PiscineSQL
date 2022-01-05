@@ -1,5 +1,5 @@
-DROP FUNCTION IF EXISTS space_travel;
-DROP FUNCTION IF EXISTS list_satellite_inf_750;
+--  DROP FUNCTION IF EXISTS space_travel;
+--  DROP FUNCTION IF EXISTS list_satellite_inf_750;
 
 CREATE FUNCTION space_travel(origin INT, destination INT, quantity BIGINT)
     RETURNS boolean AS
@@ -34,5 +34,5 @@ BEGIN
 END
 $$ LANGUAGE plpgsql;
 
-SELECT space_travel(3, 1, 5);
-SELECT * FROM list_satellite_inf_750(1);
+--  SELECT space_travel(3, 1, 5);
+--  SELECT * FROM list_satellite_inf_750(1);
