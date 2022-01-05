@@ -1,2 +1,3 @@
 SELECT count(*) FROM transaction
-GROUP BY assistant;
+GROUP BY assistant
+HAVING assistant = 'julien.clement';

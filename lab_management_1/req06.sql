@@ -1,2 +1,3 @@
-SELECT login FROM assistant, transaction
-WHERE assistant NOT IN transaction.assistant;
+SELECT login FROM assistant
+WHERE login NOT IN (SELECT assistant FROM transaction)
+ORDER BY login;

@@ -1,2 +1,2 @@
-SELECT price FROM can;
+SELECT price FROM can
 WHERE name = 'CandyUp';
