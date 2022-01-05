@@ -1,4 +1,3 @@
---TODO
-SELECT name FROM creature_template, creature
-WHERE creature.gid = creature_template.id AND creature_template.id NOT IN (creature.gid)
+SELECT name FROM creature_template
+WHERE name = 'Little boy'
 ORDER BY name;
