@@ -1,11 +1,12 @@
---  DROP FUNCTION IF EXISTS space_travel;
---  DROP FUNCTION IF EXISTS list_satellite_inf_750;
+DROP FUNCTION IF EXISTS space_travel;
+DROP FUNCTION IF EXISTS list_satellite_inf_750;
 
 CREATE FUNCTION space_travel(origin INT, destination INT, quantity BIGINT)
     RETURNS boolean AS
 $$
 BEGIN
-    IF quantity > (SELECT population FROM planet WHERE id = origin) OR quantity < 0 THEN
+    IF quantity > (SELECT population FROM planet WHERE id = origin) OR quantity < 0 
+        OR (SELECT id_system FROM planet WHERE origin =  planet.id) <> (SELECT id_system FROM planet WHERE destination =  planet.id) THEN
         RETURN FALSE;
     END IF;
 
@@ -33,5 +34,5 @@ BEGIN
 END
 $$ LANGUAGE plpgsql;
 
---  SELECT space_travel(3, 1, 5);
---  SELECT * FROM list_satellite_inf_750(1);
+SELECT space_travel(3, 1, 5);
+SELECT * FROM list_satellite_inf_750(1);
