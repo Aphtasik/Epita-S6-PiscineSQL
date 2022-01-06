@@ -16,7 +16,7 @@ CREATE VIEW view_nb_satellite_per_planet AS
     ORDER BY "number of satellites", planet.name;
 
 CREATE VIEW view_average_period AS
-    SELECT planetary_system.name as system, round(avg(period), 2) AS average_period FROM planetary_system
+    SELECT planetary_system.name as system, coalesce(round(avg(period), 2), 0) AS average_period FROM planetary_system
     LEFT OUTER JOIN planet ON planet.id_system = planetary_system.id
     GROUP BY planetary_system.name
     ORDER BY average_period, planetary_system.name;
