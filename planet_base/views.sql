@@ -1,7 +1,7 @@
-DROP VIEW view_nearest_planet_to_sun;
-DROP VIEW view_nb_satellite_per_planet;
-DROP VIEW view_average_period;
-DROP VIEW view_biggest_entites;
+--  DROP VIEW view_nearest_planet_to_sun;
+--  DROP VIEW view_nb_satellite_per_planet;
+--  DROP VIEW view_average_period;
+--  DROP VIEW view_biggest_entites;
 
 CREATE VIEW view_nearest_planet_to_sun AS
     SELECT planet.name FROM planet, planetary_system
@@ -21,14 +21,23 @@ CREATE VIEW view_average_period AS
     GROUP BY planetary_system.name
     ORDER BY average_period, planetary_system.name;
 
+--  CREATE VIEW view_biggest_entites AS
+--      SELECT type, system, name, radius FROM
+--          (SELECT 'planet' AS type, (SELECT planetary_system.name FROM planetary_system JOIN planet ON planetary_system.id = planet.id_system) AS system, name, radius FROM planet
+--          UNION SELECT 'satellite' AS type, (SELECT planetary_system.name FROM satellite, planetary_system, planet WHERE planet.id = satellite.id_planet AND planet.id_system = planetary_system.id) AS system, name, radius FROM satellite)
+--      AS rad_names
+--      ORDER BY radius DESC, name
+--      LIMIT 10;
+
 CREATE VIEW view_biggest_entites AS
-    SELECT name, radius FROM (SELECT name, radius FROM planet UNION SELECT name, radius FROM satellite) AS rad_names
+    SELECT type, system, name, radius FROM
+        (SELECT 'planet' AS type, planetary_system.name WHERE planetary_system.id = planet.id_system AS system, name, radius FROM planet
+        UNION SELECT 'satellite' AS type, planetary_system.name WHERE planetary_system.id = planet.id_system AND planet.id = satellite.id_planet AS system, name, radius FROM satellite)
+    AS rad_names
     ORDER BY radius DESC, name
     LIMIT 10;
 
-
-SELECT * from view_nearest_planet_to_sun;
-SELECT * from view_nb_satellite_per_planet;
-SELECT * from view_average_period;
-SELECT * from view_biggest_entites;
-
+--  SELECT * from view_nearest_planet_to_sun;
+--  SELECT * from view_nb_satellite_per_planet;
+--  SELECT * from view_average_period;
+--  SELECT * from view_biggest_entites;
