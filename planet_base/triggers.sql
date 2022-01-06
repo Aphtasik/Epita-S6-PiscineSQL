@@ -13,7 +13,7 @@ CREATE TABLE population_table (
 
 
 CREATE VIEW view_earth_population_evolution AS
-    SELECT id, TO_CHAR(date, 'DD/MM/YYYY HH24:MM:SS'), "old population", "new population" FROM population_table
+    SELECT id, TO_CHAR(date, 'DD/MM/YYYY HH24:MM:SS') AS date, "old population", "new population" FROM population_table
     ORDER BY date;
 
 
