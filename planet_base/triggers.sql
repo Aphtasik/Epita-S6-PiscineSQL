@@ -6,7 +6,7 @@
 
 CREATE TABLE population_table (
     id SERIAL,
-    date TIMESTAMP,
+    date::timestamp,
     "old population" BIGINT,
     "new population" BIGINT
 );
