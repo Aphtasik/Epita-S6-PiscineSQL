@@ -6,14 +6,14 @@
 
 CREATE TABLE population_table (
     id SERIAL,
-    date::timestamp,
+    date TIMESTAMP,
     "old population" BIGINT,
     "new population" BIGINT
 );
 
 
 CREATE VIEW view_earth_population_evolution AS
-    SELECT * FROM population_table
+    SELECT id, TO_CHAR(date, 'DD/MM/YYYY HH24:MM:SS'), "old population", "new population" FROM population_table
     ORDER BY date;
 
 
@@ -34,7 +34,6 @@ FOR EACH ROW
 WHEN (OLD.name = 'Earth' AND OLD.population <> NEW.population)
 EXECUTE PROCEDURE population_table_add();
 
---
 --  SELECT space_travel(3, 1, 5);
 --  SELECT space_travel(3, 1, 5);
 --  SELECT space_travel(3, 1, 5);
