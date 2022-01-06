@@ -21,18 +21,10 @@ CREATE VIEW view_average_period AS
     GROUP BY planetary_system.name
     ORDER BY average_period, planetary_system.name;
 
---  CREATE VIEW view_biggest_entites AS
---      SELECT type, system, name, radius FROM
---          (SELECT 'planet' AS type, (SELECT planetary_system.name FROM planetary_system JOIN planet ON planetary_system.id = planet.id_system) AS system, name, radius FROM planet
---          UNION SELECT 'satellite' AS type, (SELECT planetary_system.name FROM satellite, planetary_system, planet WHERE planet.id = satellite.id_planet AND planet.id_system = planetary_system.id) AS system, name, radius FROM satellite)
---      AS rad_names
---      ORDER BY radius DESC, name
---      LIMIT 10;
-
 CREATE VIEW view_biggest_entites AS
     SELECT type, system, name, radius FROM
-        (SELECT 'planet' AS type, planetary_system.name WHERE planetary_system.id = planet.id_system AS system, name, radius FROM planet
-        UNION SELECT 'satellite' AS type, planetary_system.name WHERE planetary_system.id = planet.id_system AND planet.id = satellite.id_planet AS system, name, radius FROM satellite)
+        (SELECT 'planet' AS type, planetary_system.name AS system, planet.name, planet.radius FROM planet, planetary_system WHERE planetary_system.id = planet.id_system
+        UNION SELECT 'satellite' AS type, planetary_system.name AS system, satellite.name, satellite.radius FROM satellite, planet, planetary_system WHERE planetary_system.id = planet.id_system AND planet.id = satellite.id_planet)
     AS rad_names
     ORDER BY radius DESC, name
     LIMIT 10;
@@ -41,3 +33,4 @@ CREATE VIEW view_biggest_entites AS
 --  SELECT * from view_nb_satellite_per_planet;
 --  SELECT * from view_average_period;
 --  SELECT * from view_biggest_entites;
+--
