@@ -1,8 +1,3 @@
---  DROP VIEW view_nearest_planet_to_sun;
---  DROP VIEW view_nb_satellite_per_planet;
---  DROP VIEW view_average_period;
---  DROP VIEW view_biggest_entities;
-
 CREATE VIEW view_nearest_planet_to_sun AS
     SELECT planet.name as planet FROM planet, planetary_system
     WHERE upper(planetary_system.star) = 'SUN' AND planetary_system.id = planet.id_system 
@@ -28,8 +23,3 @@ CREATE VIEW view_biggest_entities AS
     AS rad_names
     ORDER BY radius DESC, name
     LIMIT 10;
-
---  SELECT * from view_nearest_planet_to_sun;
---  SELECT * from view_nb_satellite_per_planet;
---  SELECT * from view_average_period;
---  SELECT * from view_biggest_entities;
