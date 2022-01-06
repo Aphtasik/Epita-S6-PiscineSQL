@@ -1,7 +1,7 @@
 --  DROP VIEW view_nearest_planet_to_sun;
 --  DROP VIEW view_nb_satellite_per_planet;
 --  DROP VIEW view_average_period;
---  DROP VIEW view_biggest_entites;
+--  DROP VIEW view_biggest_entities;
 
 CREATE VIEW view_nearest_planet_to_sun AS
     SELECT planet.name as planet FROM planet, planetary_system
@@ -21,7 +21,7 @@ CREATE VIEW view_average_period AS
     GROUP BY planetary_system.name
     ORDER BY average_period, planetary_system.name;
 
-CREATE VIEW view_biggest_entites AS
+CREATE VIEW view_biggest_entities AS
     SELECT type, system, name, radius FROM
         (SELECT 'planet' AS type, planetary_system.name AS system, planet.name, planet.radius FROM planet, planetary_system WHERE planetary_system.id = planet.id_system
         UNION SELECT 'satellite' AS type, planetary_system.name AS system, satellite.name, satellite.radius FROM satellite, planet, planetary_system WHERE planetary_system.id = planet.id_system AND planet.id = satellite.id_planet)
@@ -32,4 +32,4 @@ CREATE VIEW view_biggest_entites AS
 --  SELECT * from view_nearest_planet_to_sun;
 --  SELECT * from view_nb_satellite_per_planet;
 --  SELECT * from view_average_period;
---  SELECT * from view_biggest_entites;
+--  SELECT * from view_biggest_entities;
