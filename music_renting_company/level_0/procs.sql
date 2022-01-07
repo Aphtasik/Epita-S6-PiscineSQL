@@ -17,7 +17,7 @@ BEGIN
             ELSE duration/60
         END;
 
-    RETURN (minute, ':',
+    RETURN concat(minute, ':',
     CASE 
         WHEN sec < 0 THEN '00'
         WHEN sec > 9 THEN concat('', sec)
