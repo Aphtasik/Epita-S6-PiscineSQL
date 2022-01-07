@@ -1,0 +1,2 @@
+DELETE FROM music
+WHERE duration BETWEEN 102 AND 202;
