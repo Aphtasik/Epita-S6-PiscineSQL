@@ -4,10 +4,14 @@ $$
 DECLARE
     sec INT;
 BEGIN
-    sec := MOD(duration, 60);
+    sec := 
+        CASE 
+            WHEN duration IS NULL THEN 0
+            ELSE MOD(duration, 60)
+        END;
     RETURN concat(duration/60, ':',
     CASE
-        WHEN sec < 0 OR sec IS NULL THEN '00'
+        WHEN sec < 0 THEN '00'
         WHEN sec > 9 THEN concat('', sec)
         ELSE concat('0', sec)
     END);
