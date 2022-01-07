@@ -5,13 +5,10 @@ DECLARE
     sec INT;
 BEGIN
     sec := MOD(duration, 60);
-    RETURN QUERY;
-
-    SELECT concat(duration/60, ':', 
-        CASE WHEN sec > 9 THEN sec
-             ELSE concat('0', sec)
-        END);
+    RETURN concat(duration/60, ':',
+    CASE
+        WHEN sec > 9 THEN concat('', sec)
+        ELSE concat('0', sec)
+    END);
 END;
 $$ language plpgsql;
-
-SELECT duration_to_string(123);
